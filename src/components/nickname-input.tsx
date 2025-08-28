@@ -20,6 +20,7 @@ export function NicknameInput({ onSubmit }: NicknameInputProps) {
     if (nickname.trim()) {
       onSubmit(nickname.trim())
     }
+    setNickname("")
   }
 
   return (

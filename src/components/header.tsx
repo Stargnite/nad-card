@@ -1,12 +1,26 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Wallet, LogOut } from "lucide-react"
-import { useActiveAccount, useDisconnect } from "thirdweb/react"
+import { Button } from "@/components/ui/button";
+import { Wallet, LogOut } from "lucide-react";
+import {
+  useActiveAccount,
+  useActiveWallet,
+  useDisconnect,
+} from "thirdweb/react";
 
 export function Header() {
-  const account = useActiveAccount()
-  const { disconnect } = useDisconnect()
+  const account = useActiveAccount();
+  const { disconnect } = useDisconnect();
+  const wallet = useActiveWallet();
+
+
+  const handleDisconnectWallet = () => {
+    if (wallet) {
+      disconnect(wallet);
+      wallet.disconnect;
+      console.log(wallet);
+    }
+  };
 
   return (
     <header className="border-b border-purple-800/30 bg-slate-900/50 backdrop-blur-sm">
@@ -24,10 +38,10 @@ export function Header() {
               {account.address.slice(0, 6)}...{account.address.slice(-4)}
             </span>
             <Button
-              onClick={() => disconnect}
+              onClick={handleDisconnectWallet}
               variant="outline"
               size="sm"
-              className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10"
+              className="border-purple-500/50 bg-purple-500/50 text-white text-purple-300 hover:bg-purple-500/10 hover:text-white"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Disconnect
@@ -36,5 +50,5 @@ export function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }

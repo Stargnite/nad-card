@@ -20,7 +20,7 @@ interface ProfileCardProps {
 }
 
 export function ProfileCard({ walletAddress, nickname, profileData, chain }: ProfileCardProps) {
-  const { data: balance } = useWalletBalance({
+  const { data: balance,  } = useWalletBalance({
     client,
     chain,
     address: walletAddress,
